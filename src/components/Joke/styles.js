@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from '../../styles';
+import { color } from '../styles';
 
 export const Container = styled.div`
 	width: 680px;
@@ -9,42 +9,91 @@ export const Container = styled.div`
 	box-sizing: border-box;
 `;
 
-export const ContainerHeartIcon = styled.div`
-	float: right;
+export const ContainerJokeHeader = styled.div`
+	display: flex;
+	justify-content: flex-end;
+`;
 
+export const ContainerHeartIcon = styled.div`
 	&:hover {
 		cursor: pointer;
 	}
 `;
 
-export const ContainerMessageIcon = styled.div`
-
+export const ContainerFlex = styled.div`
+	display: flex;
 `;
 
-export const MessageIcon = styled.div`
-
+export const ContainerMessageIcon = styled.div`
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: ${color.white};
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const ContainerJokeContent = styled.div`
+	max-width: 540px;
+	margin-left: 20px;
+`;
+
+export const JokeId = styled.div`
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 14px;
+	color: ${color.darkGrey};
 
 `;
 
-export const ContainerJokeLink = styled.div`
-
+export const JokeLink = styled.a`
+	margin-left: 4px;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 14px;
+	color: ${color.blue};
 `;
+
+export const ConyainerJokeLinkIcon = styled.div`
+	display: inline-block;
+	margin-left: 5px;
+`;
+
 
 export const JokeText = styled.div`
-
+	margin-top: 5px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 26px;
+	color: ${color.black};
 `;
 
-export const JokeUpdate = styled.div`
+export const ContainerJokeFooter = styled.div`
+	margin-top: 23px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
 
+
+export const JokeUpdate = styled.div`
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 14px;
+	color: ${color.darkGrey};
 `;
 
 export const JokeTag = styled.div`
-
+	
 `;
 
-export const ContainerFavorite = styled.div`
 
-`;

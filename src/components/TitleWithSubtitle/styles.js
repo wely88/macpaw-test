@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from '../../styles';
+import { color } from '../styles';
 
 export const Title = styled.h1`
    	font-family: 'Roboto', sans-serif;

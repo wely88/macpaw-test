@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from '../../styles';
+import { color } from '../styles';
 
 export const HeaderText = styled.p`
    	font-family: 'Roboto', sans-serif;

@@ -7,6 +7,7 @@ export const color = {
   darkGrey: "#ABABAB",
   grey: "#F8F8F8",
   red: "#FF6767",
+  blue: "#8EA7FF",
 };
 
 // Based on: https://jsramblings.com/2018/02/04/styled-components-media-queries.html
@@ -27,15 +28,5 @@ export const transition = `
   transition: all 0.3s ease;
 `;
 
-// Containers' css
-export const AppWrapper = styled.div`
-  position: relative;
-  max-width: 1200px;
-  width: 100%;
-  height: 100%;
-  padding: 0 32px;
-  margin: 0 auto;
-  box-sizing: border-box;
-`;
 
 
