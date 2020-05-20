@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { color } from '../../styles';
 
-export const HeaderText = styled.h1`
-   font-family: Roboto;
+export const HeaderText = styled.p`
+   	font-family: 'Roboto', sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 20px;
