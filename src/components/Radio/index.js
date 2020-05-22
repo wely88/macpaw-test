@@ -4,11 +4,11 @@ import { Label, Input, Span } from './styles';
 
 function Radio(props) {
 
-	const { text, isChecked } = props;
+	const { text, onChange, isChecked } = props;
 
 	return(
 		<Label>{text}
-  			<Input type="checkbox" checked={isChecked} />
+  			<Input type="checkbox" checked={isChecked} onChange={onChange}/>
   			<Span></Span>
 		</Label>
 	);

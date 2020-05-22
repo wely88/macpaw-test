@@ -3,7 +3,7 @@ import { color } from '../styles';
 
 export const Span = styled.span`
 	position: absolute;
-	top: 0;
+	top: 2px;
 	left: 0;
 	height: 20px;
 	width: 20px;
@@ -36,6 +36,7 @@ export const Input = styled.input`
 
 
 export const Label = styled.label`
+	width: fit-content;
 	display: block;
 	position: relative;
 	padding-left: 36px;

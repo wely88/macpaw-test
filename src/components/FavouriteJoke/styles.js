@@ -1,17 +1,14 @@
 import styled from "styled-components";
-import { color, device } from '../styles';
+import { color } from '../styles';
 
-export const Container = styled.div`
+export const Container = styled.li`
+	max-width: 400px;
 	width: 100%;
-	max-width: 680px;
-	background: ${color.grey};
 	border-radius: 20px;
-	padding: 40px;
+	padding: 20px;
 	box-sizing: border-box;
-
-	@media ${device.tillLaptop} {
-		max-width: 754px;
-    }
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	background: ${color.white};
 `;
 
 export const ContainerJokeHeader = styled.div`
@@ -20,9 +17,7 @@ export const ContainerJokeHeader = styled.div`
 `;
 
 export const ContainerHeartIcon = styled.div`
-	&:hover {
-		cursor: pointer;
-	}
+	
 `;
 
 export const ContainerFlex = styled.div`
@@ -33,7 +28,7 @@ export const ContainerMessageIcon = styled.div`
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	background: ${color.white};
+	background: ${color.grey};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -76,13 +71,13 @@ export const JokeText = styled.p`
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 18px;
-	line-height: 26px;
+	font-size: 14px;
+	line-height: 20px;
 	color: ${color.black};
 `;
 
 export const ContainerJokeFooter = styled.div`
-	margin-top: 23px;
+	margin-top: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -102,18 +97,5 @@ export const BoldText = styled.span`
 	font-weight: bold;
 `;
 
-export const JokeTag = styled.div`
-	background: ${color.white};
-	border-radius: 6px;
-	padding: 6px 20px;
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 10px;
-	line-height: 14px;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	color: ${color.black};
-`;
 
 

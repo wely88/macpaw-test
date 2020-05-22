@@ -21,6 +21,8 @@ export const device = {
   mobile: `(min-width: ${size.mobileS}px)`,
   tablet: `(min-width: ${size.tablet}px)`,
   laptop: `(min-width: ${size.laptop}px)`,
+  tillTablet: `(max-width: ${size.tablet}px)`,
+  tillLaptop: `(max-width: ${size.laptop}px)`,
 };
 
 

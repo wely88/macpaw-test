@@ -7,12 +7,14 @@ export const Form = styled.form`
 
 export const CaterogiesList = styled.ul`
 	display: flex;
+	flex-wrap: wrap;
 	margin: 23px 0;
 `;
 
 export const CategoryItem = styled.li`
 	cursor: pointer;
 	margin-right: 10px;
+	margin-bottom: 10px;
 	padding: 6px 15px;
 	border: 2px solid ${color.grey};
 	box-sizing: border-box;

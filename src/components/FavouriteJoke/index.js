@@ -22,21 +22,13 @@ import {
 	ContainerJokeFooter,
 } from './styles';
 
-function Joke(props) {
-
-	const { randomJoke } = props;
-	const [ isFavourite, setIsFavourite ] = useState(false);
-
-	let currentDate = new Date;
-	let jokeUpdateDate = new Date(randomJoke.updated_at)
-	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
-	
+function FavouriteJoke(props) {
 
 	return(
 		<Container>
 			<ContainerJokeHeader>
-				<ContainerHeartIcon onClick={() => {setIsFavourite(!isFavourite)}}>
-					{isFavourite ? <HeartFilledIcon /> : <HeartIcon />}
+				<ContainerHeartIcon>
+					<HeartFilledIcon /> 
 				</ContainerHeartIcon>
 			</ContainerJokeHeader>	
 			<ContainerFlex>
@@ -45,19 +37,16 @@ function Joke(props) {
 				</ContainerMessageIcon>	
 				<ContainerJokeContent>
 					<JokeId>ID:
-						<JokeLink href={randomJoke.url}>
-							{randomJoke.id}
+						<JokeLink href="/">
+							dddddd
 							<ConyainerJokeLinkIcon>
 								<JokeLinkIcon />
 							</ConyainerJokeLinkIcon>
 						</JokeLink>
 					</JokeId>
-					<JokeText>{randomJoke.value}</JokeText>
+					<JokeText>ddddd</JokeText>
 					<ContainerJokeFooter>
-						<JokeUpdate>Last update:<BoldText> {lastUpdate} hours ago</BoldText></JokeUpdate>
-						{randomJoke.categories.map(category => {
-							return <JokeTag key={category}>{category}</JokeTag>
-						})}
+						<JokeUpdate>Last update:<BoldText> 0 hours ago</BoldText></JokeUpdate>
 					</ContainerJokeFooter>	
 				</ContainerJokeContent>
 			</ContainerFlex>	
@@ -65,4 +54,4 @@ function Joke(props) {
 	);
 }
 
-export default Joke;
+export default FavouriteJoke;

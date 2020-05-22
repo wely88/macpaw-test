@@ -14,47 +14,77 @@ import GetJokeButton from '../GetJokeButton';
 
 function SearchForm(props) {
 
-	const categories = [
-      { value: "Home", link: "/" },
-      { value: "Be a Pro", link: "/pro" },
-      { value: "About", link: "/about" },
-      { value: "Careers", link: "/careers" }
-    ];
+    let [ searchType, setSearchType ] = useState("");
+    let [ currentCategory, setCurrentCategory ] = useState("");
 
-    let [currentCategory, setCurrentCategory] = useState("");
+    const { categories, onClick } = props;
 
     function setCategory(category) {
 		setCurrentCategory(category);
 	}
 	console.log(currentCategory)
 
-
 	return(
 		<Form>
-			<Radio text="Random" />
-			<Radio text="From caterogies"/>
+			<Radio 
+				text="Random" 
+				isChecked={
+					searchType === "random"
+						? true
+						: false
+				}
+				onChange={() =>
+					setSearchType("random")
+				}
+			/>
+			<Radio 
+				text="From caterogies"
+				isChecked={
+					searchType === "category"
+						? true
+						: false
+				}
+				onChange={() =>
+					setSearchType("category")
+				}
+			/>
+			{searchType === "category" ? 
 				<CaterogiesList>
 					{categories.map(category => {
 	                    return (
 						<CategoryItem 
-							id={category.text} 
-							text={category.value} 
+							id={category} 
+							key={category}
+							text={category} 
 							onClick={() =>
-								setCategory(category.value)
+								setCategory(category)
 							}
 							isActive={
-								category.value == currentCategory
+								category === currentCategory
 									? "yes"
 									: "no"
 							}
 						/>
 						)}
 					)}	
-				</CaterogiesList>
-			<Radio text="Search"/>
-				<Input placeholder="Free text search..."/>
+				</CaterogiesList> : null 
+			}	
+			<Radio 
+				text="Search"
+				isChecked={
+					searchType === "search"
+						? true
+						: false
+				}
+				onChange={() =>
+					setSearchType("search")
+				}
+			/>
+			{searchType === "search" ? 
+				<Input placeholder="Free text search..."/> : null
+			}	
 			<ContainerButton>
-				<GetJokeButton />
+				<GetJokeButton onClick={onClick}/>
 			</ContainerButton>
 		</Form>
 	);

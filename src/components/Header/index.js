@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { HeaderText } from './styles';
+import { 
+	HeaderText,
+	ContainerHeader,
+	HeaderBurgerButton,
+  	BurgerLine,
+  	FavouriteContainer,
+  	FavouriteJokesTitle,
+ } from './styles';
 
-function Header() {
+function Header(props) {
+
+	const { isMobile, onClick, isFavouriteOpen } = props;
 
 	return(
-		<HeaderText>MSI 2020</HeaderText>
+		<ContainerHeader>
+			<HeaderText>MSI 2020</HeaderText>
+			{isMobile ? 
+			<FavouriteContainer>	
+				<HeaderBurgerButton onClick={onClick}>
+              		<BurgerLine isFavouriteOpen={isFavouriteOpen}></BurgerLine>
+              		<BurgerLine isFavouriteOpen={isFavouriteOpen}></BurgerLine>
+            	</HeaderBurgerButton> 
+            	<FavouriteJokesTitle>Favourite</FavouriteJokesTitle>
+			</FavouriteContainer>	
+	        : null }
+		</ContainerHeader>
 	);
 }
 
