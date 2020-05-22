@@ -37,6 +37,7 @@ export const ContainerFlex = styled.div`
 
 export const ContainerGetJoke = styled.div`
   width: 66.6%;
+  overflow: scroll;
 
   	@media ${device.tillLaptop} {
        width: 100%;

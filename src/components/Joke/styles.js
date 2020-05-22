@@ -7,6 +7,7 @@ export const Container = styled.div`
 	background: ${color.grey};
 	border-radius: 20px;
 	padding: 40px;
+	margin-bottom: 20px;
 	box-sizing: border-box;
 
 	@media ${device.tillLaptop} {

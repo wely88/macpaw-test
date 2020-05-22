@@ -24,31 +24,31 @@ import {
 
 //Custom hook to fetch data 
 const useHackerNewsApi = () => {
-const [data, setData] = useState();
-const [url, setUrl] = useState();
-const [isLoading, setIsLoading] = useState(false);
-const [isError, setIsError] = useState(false);
- 
-useEffect(() => {
-    const fetchData = async () => {
-      	setIsError(false);
-      	setIsLoading(true);
- 
-      	try {
-       		const result = await axios(url);
- 
-        	setData(result.data);
-     	} catch (error) {
-        	setIsError(true);
-      	}
- 
-      	setIsLoading(false);
-    };	
- 
-    fetchData();
-  }, [url]);
- 
-  return [{ data, isLoading, isError }, setUrl];
+	const [data, setData] = useState();
+	const [url, setUrl] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+	const [isError, setIsError] = useState(false);
+	 
+	useEffect(() => {
+	    const fetchData = async () => {
+	      	setIsError(false);
+	      	setIsLoading(true);
+	 
+	      	try {
+	       		const result = await axios(url);
+	 			
+	        	setData(result.data.result ? result.data.result : result.data);
+	     	} catch (error) {
+	        	setIsError(true);
+	      	}
+	 
+	      	setIsLoading(false);
+	    };	
+	 
+	fetchData();
+
+  	}, [url]);
+  	return [{ data, isLoading, isError }, setUrl];
 }
 
 
@@ -65,8 +65,6 @@ function App(props) {
 	const [ isMobile, setIsMobile ] = useState(false);
 	const [ isFavouriteOpen, setIsFavouriteOpen ] = useState(false);
 	const [ isFavouriteOpenAnimation, setIsFavouriteOpenAnimation ] = useState(false);
-
-	let favoutites = [];
 
 //Get screen size to switch between Mobile and Web view	
 	useLayoutEffect(() => {
@@ -117,6 +115,7 @@ function App(props) {
 	  		default:
 	  			console.log('hehe')	
   		}
+  		
   	}  	
 
   	function handleIsFavouriteOpen() {
@@ -131,7 +130,6 @@ function App(props) {
   		}
   	}
 
-  	{data ? console.log(data) : console.log("no data")}
  	
 	return (
 		<Section>
@@ -146,8 +144,11 @@ function App(props) {
 							<SearchForm categories={categories} onClick={showJoke} searchType={searchType} currentCategory={currentCategory} onChange={handleInputValue}/>
 						</ContainerSearchForm>
 							{data ? 
-								<ContainerJokes>	
-									<Joke data={data} />
+								<ContainerJokes>
+									{data.map(item => {
+										return <Joke jokeData={item} />
+										})
+									}
 								</ContainerJokes>
 							: null }	
 					</GetJokeWrapper>

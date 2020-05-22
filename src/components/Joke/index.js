@@ -24,11 +24,13 @@ import {
 
 function Joke(props) {
 
-	const { randomJoke } = props;
+	const { jokeData } = props;
 	const [ isFavourite, setIsFavourite ] = useState(false);
 
+	console.log(jokeData)
+
 	let currentDate = new Date;
-	let jokeUpdateDate = new Date(randomJoke.updated_at)
+	let jokeUpdateDate = new Date(jokeData.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
 	
 
@@ -45,17 +47,17 @@ function Joke(props) {
 				</ContainerMessageIcon>	
 				<ContainerJokeContent>
 					<JokeId>ID:
-						<JokeLink href={randomJoke.url}>
-							{randomJoke.id}
+						<JokeLink href={jokeData.url}>
+							{jokeData.id}
 							<ConyainerJokeLinkIcon>
 								<JokeLinkIcon />
 							</ConyainerJokeLinkIcon>
 						</JokeLink>
 					</JokeId>
-					<JokeText>{randomJoke.value}</JokeText>
+					<JokeText>{jokeData.value}</JokeText>
 					<ContainerJokeFooter>
 						<JokeUpdate>Last update:<BoldText> {lastUpdate} hours ago</BoldText></JokeUpdate>
-						{randomJoke.categories.map(category => {
+						{jokeData.categories.map(category => {
 							return <JokeTag key={category}>{category}</JokeTag>
 						})}
 					</ContainerJokeFooter>	

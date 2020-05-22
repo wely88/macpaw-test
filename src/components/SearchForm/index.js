@@ -18,7 +18,7 @@ function SearchForm(props) {
 
     //let [ currentCategory, setCurrentCategory ] = useState("");
 
-    const { categories, onClick, dispatch, searchType, currentCategory, onChange } = props;
+    const { categories, onClick, dispatch, searchType, currentCategory, onChange, isError } = props;
 
 	return(
 		<Form>

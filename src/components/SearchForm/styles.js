@@ -48,7 +48,7 @@ export const ContainerButton = styled.div`
 export const Input = styled.input`
 	margin-top: 7px;
     padding: 10px 15px;
-    border: 2px solid #333333;
+    border: 2px solid ${color.black};
     box-sizing: border-box;
     border-radius: 10px;
     width: 100%;
