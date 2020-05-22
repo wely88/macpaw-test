@@ -27,17 +27,19 @@ function Joke(props) {
 	const { jokeData } = props;
 	const [ isFavourite, setIsFavourite ] = useState(false);
 
-	console.log(jokeData)
-
 	let currentDate = new Date;
 	let jokeUpdateDate = new Date(jokeData.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
 	
+	function handleClickFavourite() {
+		setIsFavourite(true)
+		localStorage.setItem('id', jokeData.id)
+	}
 
 	return(
 		<Container>
 			<ContainerJokeHeader>
-				<ContainerHeartIcon onClick={() => {setIsFavourite(!isFavourite)}}>
+				<ContainerHeartIcon onClick={handleClickFavourite}>
 					{isFavourite ? <HeartFilledIcon /> : <HeartIcon />}
 				</ContainerHeartIcon>
 			</ContainerJokeHeader>	
