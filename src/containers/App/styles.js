@@ -26,11 +26,13 @@ const DisappearShadow = keyframes`
 export const Section = styled.section`
   position: relative;
   overflow: hidden;
+  height: 100vh;
 `;
 
 export const ContainerFlex = styled.div`
 	display: flex;
 	flex-direction: row;
+  height: 100%;
 `;
 
 export const ContainerGetJoke = styled.div`
@@ -72,41 +74,54 @@ export const ContainerJokes = styled.div`
 `;
 
 export const ContainerFavouriteJokes = styled.div`
-	width: 33.3%;
 	background-color: ${color.grey};
 	padding: 40px;
+  height: 100%;
 	box-sizing: border-box;
 
   @media ${device.tillLaptop} {
-       position: absolute;
-       right: 0;
-       height: 100%;
-       max-width: 480px;
-       width: 58%;
-       animation: ${props =>
-          props.isFavouriteOpenAnimation ? AppearFavourite : DisappearFavourite}
-          1s ease-in-out;
-        }
+    position: absolute;
+    right: 0;
+    height: 100%;
+    max-width: 480px;
+    width: 58%;
+    animation: ${props =>
+      props.isFavouriteOpenAnimation ? AppearFavourite : DisappearFavourite}
+      1s ease-in-out;
+    }
+
+  @media ${device.tillTablet} {
+    max-width: unset;
+    width: 100%;
+    padding: 20px;
+  }      
 `;
 
-//       transform: translateX(${props => (props.isFavouriteOpen ? "0" : "100%" )});
-
 export const ContainerMobileShadow = styled.div`
-  position: absolute;
-  width: 100%;
+  width: 33.3%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: ${props => (props.isFavouriteOpen ? "block" : "none" )};
-  animation: ${props =>
-          props.isFavouriteOpenAnimation ? AppearShadow : DisappearShadow}
-          1s ease-in-out;
-        }
+  box-sizing: border-box;
+
+  @media ${device.tillLaptop} {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: ${props => (props.isFavouriteOpen ? "block" : "none" )};
+    animation: ${props =>
+            props.isFavouriteOpenAnimation ? AppearShadow : DisappearShadow}
+            1s ease-in-out;
+          }
+  }        
 `;
 
 
 
 export const FavouriteJokesList = styled.ul`
  	 margin-top: 48px;
+
+   @media ${device.tillTablet} {
+       margin-top: 68px;
+  }  
 `;
 
 

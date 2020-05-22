@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { connect } from 'react-redux'
+//import PropTypes from 'prop-types';
 import axios from 'axios';
 import Header from '../../components/Header';
 import TitleWithSubtitle from '../../components/TitleWithSubtitle';
@@ -20,15 +22,18 @@ import {
 } from './styles'
 
 
-function App() {
+function App(props) {
 
+	const { general } = props;
+	const { category } = general;
+	//const [ searchType, setSearchType ] = useState('');
 	const [ categories, setCategories ] = useState();
 	const [ randomJoke, setRandomJoke ] = useState();
 	const [ isMobile, setIsMobile ] = useState(false);
 	const [ isFavouriteOpen, setIsFavouriteOpen ] = useState(false);
 	const [ isFavouriteOpenAnimation, setIsFavouriteOpenAnimation ] = useState(false);
 
-
+	console.log(category)
 	let favoutites = [];
 
 	useLayoutEffect(() => {
@@ -48,22 +53,42 @@ function App() {
 	console.log('isFavouriteOpen', isFavouriteOpen)
 	console.log('isFavouriteOpenAnimation', isFavouriteOpen)
 
-
 	useEffect(async () => {
-	    const fetchData = async () => {
-	      const resultCategories = await axios(
-	        'https://api.chucknorris.io/jokes/categories',
-	      );
+		switch('random') {
+		  case 'random':  
+		    const fetchDataRandom = async () => {
+		      const resultRandom = await axios(
+		        'https://api.chucknorris.io/jokes/random',
+		      );
+		 
+		      setRandomJoke(resultRandom.data)
+		    };
+		    fetchDataRandom();
+		    break;
 
-	      const resultRandom = await axios(
-	        'https://api.chucknorris.io/jokes/random',
-	      );
+		  case 'category':  // if (x === 'value2')
+		    const fetchDataCategories = async () => {
+		      const resultCategories = await axios(
+		        'https://api.chucknorris.io/jokes/categories',
+		      );
+		 
+		      setCategories(resultCategories.data);
+		    };
+		    fetchDataCategories()
+		    break;
+		}
+	    // const fetchData = async () => {
+	    //   const resultCategories = await axios(
+	    //     'https://api.chucknorris.io/jokes/categories',
+	    //   );
+
+	    //   const resultRandom = await axios(
+	    //     'https://api.chucknorris.io/jokes/random',
+	    //   );
 	 
-	      setCategories(resultCategories.data);
-	      setRandomJoke(resultRandom.data)
-	    };
-	 
-	    fetchData();
+	    //   setCategories(resultCategories.data);
+	    //   setRandomJoke(resultRandom.data)
+	    // };
   	}, []);
 
   	function showJoke(e) {
@@ -113,5 +138,15 @@ function App() {
 		</Section>    
 	);
 }
+const mapStateToProps = state => ({
+	general: state.general
+});
+console.log(mapStateToProps)
 
-export default App;
+// App.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+//   completed: PropTypes.bool.isRequired,
+//   text: PropTypes.string.isRequired
+// }
+
+export default connect(mapStateToProps)(App);
