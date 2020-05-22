@@ -4,7 +4,7 @@ import {
 	CategoryItem,
 } from './styles';
 
-function SearchForm(props) {
+function CategoryListItem(props) {
 
 	const { id, text, onClick, isActive } = props;
 
@@ -13,4 +13,4 @@ function SearchForm(props) {
 	);
 }
 
-export default SearchForm;
+export default CategoryListItem;

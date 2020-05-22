@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { setSearchType, setCurrentCategory } from '../../actions';
+import { connect } from 'react-redux'
 
 import CategoryItem from './category'
 
@@ -14,15 +16,9 @@ import GetJokeButton from '../GetJokeButton';
 
 function SearchForm(props) {
 
-    let [ searchType, setSearchType ] = useState("");
-    let [ currentCategory, setCurrentCategory ] = useState("");
+    //let [ currentCategory, setCurrentCategory ] = useState("");
 
-    const { categories, onClick } = props;
-
-    function setCategory(category) {
-		setCurrentCategory(category);
-	}
-	console.log(currentCategory)
+    const { categories, onClick, dispatch, searchType, currentCategory, onChange } = props;
 
 	return(
 		<Form>
@@ -33,8 +29,8 @@ function SearchForm(props) {
 						? true
 						: false
 				}
-				onChange={() =>
-					setSearchType("random")
+				onChange={() => 
+					dispatch(setSearchType("random"))
 				}
 			/>
 			<Radio 
@@ -44,8 +40,8 @@ function SearchForm(props) {
 						? true
 						: false
 				}
-				onChange={() =>
-					setSearchType("category")
+				onChange={() => 
+					dispatch(setSearchType("category"))
 				}
 			/>
 			{searchType === "category" ? 
@@ -56,8 +52,8 @@ function SearchForm(props) {
 							id={category} 
 							key={category}
 							text={category} 
-							onClick={() =>
-								setCategory(category)
+							onClick={() => 
+								dispatch(setCurrentCategory(category))
 							}
 							isActive={
 								category === currentCategory
@@ -76,12 +72,12 @@ function SearchForm(props) {
 						? true
 						: false
 				}
-				onChange={() =>
-					setSearchType("search")
+				onChange={() => 
+					dispatch(setSearchType("search"))
 				}
 			/>
 			{searchType === "search" ? 
-				<Input placeholder="Free text search..."/> : null
+				<Input onChange={onChange} placeholder="Free text search..."/> : null
 			}	
 			<ContainerButton>
 				<GetJokeButton onClick={onClick}/>
@@ -90,5 +86,5 @@ function SearchForm(props) {
 	);
 }
 
-export default SearchForm;
+export default connect()(SearchForm);
 

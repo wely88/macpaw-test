@@ -22,20 +22,53 @@ import {
 } from './styles'
 
 
+//Custom hook to fetch data 
+const useHackerNewsApi = () => {
+const [data, setData] = useState();
+const [url, setUrl] = useState();
+const [isLoading, setIsLoading] = useState(false);
+const [isError, setIsError] = useState(false);
+ 
+useEffect(() => {
+    const fetchData = async () => {
+      	setIsError(false);
+      	setIsLoading(true);
+ 
+      	try {
+       		const result = await axios(url);
+ 
+        	setData(result.data);
+     	} catch (error) {
+        	setIsError(true);
+      	}
+ 
+      	setIsLoading(false);
+    };	
+ 
+    fetchData();
+  }, [url]);
+ 
+  return [{ data, isLoading, isError }, setUrl];
+}
+
+
 function App(props) {
 
 	const { general } = props;
-	const { category } = general;
-	//const [ searchType, setSearchType ] = useState('');
+	const { searchType, currentCategory } = general;
+
+	const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
+
 	const [ categories, setCategories ] = useState();
+	const [ queryValue, setQueryValue ] = useState('');
 	const [ randomJoke, setRandomJoke ] = useState();
 	const [ isMobile, setIsMobile ] = useState(false);
 	const [ isFavouriteOpen, setIsFavouriteOpen ] = useState(false);
 	const [ isFavouriteOpenAnimation, setIsFavouriteOpenAnimation ] = useState(false);
 
-	console.log(category)
 	let favoutites = [];
 
+//Get screen size to switch between Mobile and Web view	
 	useLayoutEffect(() => {
 	    function updateSize() {
 	      if (window.innerWidth < 1024) {
@@ -50,51 +83,41 @@ function App(props) {
 	    return () => window.removeEventListener("resize", updateSize);
   	}, []);
 
-	console.log('isFavouriteOpen', isFavouriteOpen)
-	console.log('isFavouriteOpenAnimation', isFavouriteOpen)
-
-	useEffect(async () => {
-		switch('random') {
-		  case 'random':  
-		    const fetchDataRandom = async () => {
-		      const resultRandom = await axios(
-		        'https://api.chucknorris.io/jokes/random',
-		      );
-		 
-		      setRandomJoke(resultRandom.data)
-		    };
-		    fetchDataRandom();
-		    break;
-
-		  case 'category':  // if (x === 'value2')
-		    const fetchDataCategories = async () => {
-		      const resultCategories = await axios(
+//Get jokes categories to render them in SearchForm
+	useEffect(async (searchType) => {
+		const fetchDataCategories = async () => {
+		    const resultCategories = await axios(
 		        'https://api.chucknorris.io/jokes/categories',
-		      );
+		    );
 		 
-		      setCategories(resultCategories.data);
-		    };
-		    fetchDataCategories()
-		    break;
-		}
-	    // const fetchData = async () => {
-	    //   const resultCategories = await axios(
-	    //     'https://api.chucknorris.io/jokes/categories',
-	    //   );
+		    setCategories(resultCategories.data);
+		};
+		fetchDataCategories()
+ 	}, []);
 
-	    //   const resultRandom = await axios(
-	    //     'https://api.chucknorris.io/jokes/random',
-	    //   );
-	 
-	    //   setCategories(resultCategories.data);
-	    //   setRandomJoke(resultRandom.data)
-	    // };
-  	}, []);
+ 	function handleInputValue(e) {
+		setQueryValue(e.target.value);
+	}
 
   	function showJoke(e) {
-  		e.preventDefault()
-  		console.log("show joke")
-  	}
+  		e.preventDefault();
+  		switch(searchType) {
+  			case 'random': 
+	  			doFetch("https://api.chucknorris.io/jokes/random");
+	  			break;
+
+	  		case 'category': 
+	  			doFetch(`https://api.chucknorris.io/jokes/random?category=${currentCategory}`);
+	  			break;	
+
+	  		case 'search': 
+	  			doFetch(`https://api.chucknorris.io/jokes/search?query=${queryValue}`);
+	  			break;
+
+	  		default:
+	  			console.log('hehe')	
+  		}
+  	}  	
 
   	function handleIsFavouriteOpen() {
   		if (isFavouriteOpen) {
@@ -107,6 +130,8 @@ function App(props) {
   			setIsFavouriteOpenAnimation(true)	
   		}
   	}
+
+  	{data ? console.log(data) : console.log("no data")}
  	
 	return (
 		<Section>
@@ -118,13 +143,13 @@ function App(props) {
 							<TitleWithSubtitle />
 						</ContainerTitle>
 						<ContainerSearchForm>	
-							<SearchForm categories={categories} onClick={showJoke} />
+							<SearchForm categories={categories} onClick={showJoke} searchType={searchType} currentCategory={currentCategory} onChange={handleInputValue}/>
 						</ContainerSearchForm>
-						{randomJoke ? 
-							<ContainerJokes>	
-								<Joke randomJoke={randomJoke} />
-							</ContainerJokes>
-						: null }		
+							{data ? 
+								<ContainerJokes>	
+									<Joke data={data} />
+								</ContainerJokes>
+							: null }	
 					</GetJokeWrapper>
 				</ContainerGetJoke>
 				<ContainerMobileShadow isFavouriteOpen={isFavouriteOpen} isFavouriteOpenAnimation={isFavouriteOpenAnimation}>
@@ -141,7 +166,8 @@ function App(props) {
 const mapStateToProps = state => ({
 	general: state.general
 });
-console.log(mapStateToProps)
+
+
 
 // App.propTypes = {
 //   onClick: PropTypes.func.isRequired,
