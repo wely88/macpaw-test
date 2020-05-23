@@ -25,8 +25,7 @@ const DisappearShadow = keyframes`
 
 export const Section = styled.section`
   position: relative;
-  overflow: hidden;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const ContainerFlex = styled.div`

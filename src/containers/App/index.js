@@ -61,6 +61,10 @@ function App(props) {
 	localStorage.setItem('jokes', JSON.stringify(jokesArray));
 	const jokesData = JSON.parse(localStorage.getItem('jokes'));
 
+	console.log("Data from local", jokesData)
+
+	console.log(jokesData)
+
 	const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
 
 	const [ categories, setCategories ] = useState();

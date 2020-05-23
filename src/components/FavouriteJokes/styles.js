@@ -45,10 +45,13 @@ export const ContainerFavouriteJokes = styled.div`
     max-width: unset;
     width: 100%;
     padding: 20px;
+    height: unset;
   }      
 `;
 
 export const ContainerMobileShadow = styled.div`
+  width: 33.3%;
+  
   @media ${device.tillLaptop} {
     position: absolute;
     width: 100%;
@@ -59,7 +62,11 @@ export const ContainerMobileShadow = styled.div`
             props.isFavouriteOpenAnimation ? AppearShadow : DisappearShadow}
             1s ease-in-out;
           }
-  }        
+  }  
+
+   @media ${device.tillTablet} {
+    overflow-y: scroll;  
+  }     
 `;
 
 export const HeaderBurgerButton = styled.button`
@@ -110,6 +117,10 @@ export const FavouriteHeader = styled.div`
   right: 0;
   z-index: 999;
   padding: 40px;
+
+  @media ${device.tillTablet} {
+      padding: 20px;
+  }  
 `;
 
 export const FavouriteJokesTitle = styled.h4`

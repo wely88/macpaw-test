@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from '../styles';
+import { color, device } from '../styles';
 
 export const Container = styled.li`
 	max-width: 400px;
@@ -14,6 +14,10 @@ export const Container = styled.li`
 	&:last-child {
 		margin-bottom: 0;
 	}
+
+	@media ${device.tillTablet} {
+      margin: 0 auto 20px;
+  }  
 `;
 
 export const ContainerJokeHeader = styled.div`

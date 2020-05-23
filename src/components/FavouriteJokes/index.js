@@ -47,7 +47,7 @@ function FavouriteJokes(props) {
 					{!isMobile ? <FavouriteJokesTitle>Favourite</FavouriteJokesTitle> : null}
 					<FavouriteJokesList>
 					{jokesData.map(joke => 
-						<FavouriteJoke joke={joke}/>
+						<FavouriteJoke key={joke.id} joke={joke}/>
 					)}
 					</FavouriteJokesList>
 				</ContainerFavouriteJokes>

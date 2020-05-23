@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    box-sizing: border-box;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -35,8 +36,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-body {
-	line-height: 1;
+html, body {
+    height: 100%;
 }
 
 ol, ul {
@@ -333,5 +334,9 @@ fieldset {
 
 textarea {
     resize: vertical;
+}
+
+#root {
+    min-height: 100%;
 }
 

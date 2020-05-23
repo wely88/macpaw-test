@@ -31,11 +31,11 @@ function Joke(props) {
 	let jokeUpdateDate = new Date(jokeData.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
 	
-	function handleClickFavourite(e) {
+	function handleClickFavourite() {
 		setIsFavourite(true)
 		jokesArray.push(jokeData);
   		localStorage.setItem('jokes', JSON.stringify(jokesArray));
-  		console.log(jokesArray)
+  		console.log("new jokesArray", jokesArray)
 	}
 
 	return(
