@@ -23,61 +23,12 @@ const DisappearShadow = keyframes`
   100% { background-color: rgba(0, 0, 0, 0); }
 `;
 
-export const Section = styled.section`
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
-`;
-
-export const ContainerFlex = styled.div`
-	display: flex;
-	flex-direction: row;
-  height: 100%;
-`;
-
-export const ContainerGetJoke = styled.div`
-  width: 66.6%;
-
-  	@media ${device.tillLaptop} {
-       width: 100%;
-    }
-`;
-
-export const GetJokeWrapper = styled.div`
-  position: relative;
-	max-width: 760px;
-	width: 100%;
-	height: 100%;
-	padding: 40px 40px 140px;
-	margin: 0 auto;
-	box-sizing: border-box;
-
-	@media ${device.tillLaptop} {
-    max-width: 854px;
-  }
-
-  @media ${device.tillTablet} {
-    padding: 20px 20px 72px;
-  }
-`;
-
-export const ContainerTitle = styled.div`
-  margin-top: 78px;
-`;
-
-export const ContainerSearchForm = styled.div`
-  margin-top: 43px;
-`;
-
-export const ContainerJokes = styled.div`
-  margin-top: 40px;
-`;
 
 export const ContainerFavouriteJokes = styled.div`
-	background-color: ${color.grey};
-	padding: 40px;
+  background-color: ${color.grey};
+  padding: 40px;
   height: 100%;
-	box-sizing: border-box;
+  box-sizing: border-box;
 
   @media ${device.tillLaptop} {
     position: absolute;
@@ -98,13 +49,10 @@ export const ContainerFavouriteJokes = styled.div`
 `;
 
 export const ContainerMobileShadow = styled.div`
-  width: 33.3%;
-  height: 100%;
-  box-sizing: border-box;
-
   @media ${device.tillLaptop} {
     position: absolute;
     width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     display: ${props => (props.isFavouriteOpen ? "block" : "none" )};
     animation: ${props =>
@@ -114,7 +62,75 @@ export const ContainerMobileShadow = styled.div`
   }        
 `;
 
+export const HeaderBurgerButton = styled.button`
+  background: ${color.black};
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  position: relative;
+  z-index: 999;
+  margin-right: 10px;
 
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const BurgerLine = styled.span`
+  display: block;
+    position: absolute;
+  height: 2px;
+  width: 14px;
+  background: ${color.white};
+  border-radius: 2px;
+  opacity: 1;
+  left: 7px;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+
+
+  &:nth-child(1) {
+      top: ${props => props.isFavouriteOpen ? "13px" : "10px"};
+      transform: ${props => props.isFavouriteOpen ? "rotate(45deg)" : "unset"};
+  }
+
+  &:nth-child(2) {
+      top: ${props => props.isFavouriteOpen ? "13px" : "16px"};
+      transform: ${props => props.isFavouriteOpen ? "rotate(-45deg)" : "unset"};
+  }
+`;
+
+export const FavouriteHeader = styled.div`
+  display: flex;
+  display: flex;
+  position: absolute;
+  right: 0;
+  z-index: 999;
+  padding: 40px;
+`;
+
+export const FavouriteJokesTitle = styled.h4`
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: ${color.darkGrey};
+  z-index: 999;
+`;
+
+export const FavouriteJokesTitleMobile = styled.h4`
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: ${color.darkGrey};
+  z-index: 999;
+`;
 
 export const FavouriteJokesList = styled.ul`
  	 margin-top: 48px;

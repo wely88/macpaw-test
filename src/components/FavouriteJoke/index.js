@@ -24,6 +24,12 @@ import {
 
 function FavouriteJoke(props) {
 
+	const { joke } = props;
+
+	let currentDate = new Date;
+	let jokeUpdateDate = new Date(joke.updated_at)
+	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
+
 	return(
 		<Container>
 			<ContainerJokeHeader>
@@ -37,16 +43,16 @@ function FavouriteJoke(props) {
 				</ContainerMessageIcon>	
 				<ContainerJokeContent>
 					<JokeId>ID:
-						<JokeLink href="/">
-							dddddd
+						<JokeLink href={joke.url}>
+							{joke.id}
 							<ConyainerJokeLinkIcon>
 								<JokeLinkIcon />
 							</ConyainerJokeLinkIcon>
 						</JokeLink>
 					</JokeId>
-					<JokeText>ddddd</JokeText>
+					<JokeText>{joke.value}</JokeText>
 					<ContainerJokeFooter>
-						<JokeUpdate>Last update:<BoldText> 0 hours ago</BoldText></JokeUpdate>
+						<JokeUpdate>Last update:<BoldText> {lastUpdate} hours ago</BoldText></JokeUpdate>
 					</ContainerJokeFooter>	
 				</ContainerJokeContent>
 			</ContainerFlex>	

@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import TitleWithSubtitle from '../../components/TitleWithSubtitle';
 import SearchForm from '../../components/SearchForm';
 import Joke from '../../components/Joke';
-import FavouriteJoke from '../../components/FavouriteJoke';
+import FavouriteJokes from '../../components/FavouriteJokes';
 
 import { 
 	Section, 
@@ -37,7 +37,7 @@ const useHackerNewsApi = () => {
 	      	try {
 	       		const result = await axios(url);
 	 			
-	        	setData(result.data.result ? result.data.result : result.data);
+	        	setData(result.data.result ? result.data.result : [result.data]);
 	     	} catch (error) {
 	        	setIsError(true);
 	      	}
@@ -57,14 +57,16 @@ function App(props) {
 	const { general } = props;
 	const { searchType, currentCategory } = general;
 
+	let jokesArray = localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [];
+	localStorage.setItem('jokes', JSON.stringify(jokesArray));
+	const jokesData = JSON.parse(localStorage.getItem('jokes'));
+
 	const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
 
 	const [ categories, setCategories ] = useState();
 	const [ queryValue, setQueryValue ] = useState('');
 	const [ randomJoke, setRandomJoke ] = useState();
 	const [ isMobile, setIsMobile ] = useState(false);
-	const [ isFavouriteOpen, setIsFavouriteOpen ] = useState(false);
-	const [ isFavouriteOpenAnimation, setIsFavouriteOpenAnimation ] = useState(false);
 
 //Get screen size to switch between Mobile and Web view	
 	useLayoutEffect(() => {
@@ -82,7 +84,7 @@ function App(props) {
   	}, []);
 
 //Get jokes categories to render them in SearchForm
-	useEffect(async (searchType) => {
+	useEffect((searchType) => {
 		const fetchDataCategories = async () => {
 		    const resultCategories = await axios(
 		        'https://api.chucknorris.io/jokes/categories',
@@ -115,20 +117,13 @@ function App(props) {
 	  		default:
 	  			console.log('hehe')	
   		}
-  		
+
   	}  	
 
-  	function handleIsFavouriteOpen() {
-  		if (isFavouriteOpen) {
-  			setIsFavouriteOpenAnimation(false);
-  			setTimeout(() => 
-  				setIsFavouriteOpen(false), 950
-  			)} 
-  		else { 
-  			setIsFavouriteOpen(true);
-  			setIsFavouriteOpenAnimation(true)	
-  		}
-  	}
+  	// function saveFavourite(jokeData) {
+  	// 	jokesArray.push(jokeData);
+  	// 	localStorage.setItem('jokes', JSON.stringify(jokesArray));
+  	//}
 
  	
 	return (
@@ -136,7 +131,7 @@ function App(props) {
 			<ContainerFlex>
 				<ContainerGetJoke>
 					<GetJokeWrapper>
-						<Header isMobile={isMobile} onClick={handleIsFavouriteOpen} isFavouriteOpen={isFavouriteOpen} />
+						<Header />
 						<ContainerTitle>
 							<TitleWithSubtitle />
 						</ContainerTitle>
@@ -146,20 +141,14 @@ function App(props) {
 							{data ? 
 								<ContainerJokes>
 									{data.map(item => {
-										return <Joke jokeData={item} />
+										return <Joke key={item.id} jokeData={item} jokesArray={jokesArray}/>
 										})
 									}
 								</ContainerJokes>
 							: null }	
 					</GetJokeWrapper>
 				</ContainerGetJoke>
-				<ContainerMobileShadow isFavouriteOpen={isFavouriteOpen} isFavouriteOpenAnimation={isFavouriteOpenAnimation}>
-					<ContainerFavouriteJokes isFavouriteOpen={isFavouriteOpen} isFavouriteOpenAnimation={isFavouriteOpenAnimation}>
-						<FavouriteJokesList>
-							<FavouriteJoke />
-						</FavouriteJokesList>
-					</ContainerFavouriteJokes>
-				</ContainerMobileShadow>	
+				<FavouriteJokes isMobile={isMobile} jokesData={jokesData} />
 			</ContainerFlex>	
 		</Section>    
 	);

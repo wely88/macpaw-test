@@ -3,8 +3,6 @@ const initialState = {
   currentCategory: '',
 };
 
-console.log(initialState)
-
 const general = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_SEARCH_TYPE':

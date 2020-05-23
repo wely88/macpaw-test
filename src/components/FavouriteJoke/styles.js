@@ -9,6 +9,11 @@ export const Container = styled.li`
 	box-sizing: border-box;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	background: ${color.white};
+	margin-bottom: 20px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 `;
 
 export const ContainerJokeHeader = styled.div`

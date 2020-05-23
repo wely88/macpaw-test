@@ -24,16 +24,18 @@ import {
 
 function Joke(props) {
 
-	const { jokeData } = props;
+	const { jokeData, onClick, jokesArray } = props;
 	const [ isFavourite, setIsFavourite ] = useState(false);
 
 	let currentDate = new Date;
 	let jokeUpdateDate = new Date(jokeData.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
 	
-	function handleClickFavourite() {
+	function handleClickFavourite(e) {
 		setIsFavourite(true)
-		localStorage.setItem('id', jokeData.id)
+		jokesArray.push(jokeData);
+  		localStorage.setItem('jokes', JSON.stringify(jokesArray));
+  		console.log(jokesArray)
 	}
 
 	return(
