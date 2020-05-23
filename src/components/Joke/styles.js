@@ -13,6 +13,10 @@ export const Container = styled.div`
 	@media ${device.tillLaptop} {
 		max-width: 754px;
     }
+
+    @media ${device.tillTablet} {
+		padding: 20px;
+    }
 `;
 
 export const ContainerJokeHeader = styled.div`
@@ -31,7 +35,7 @@ export const ContainerFlex = styled.div`
 `;
 
 export const ContainerMessageIcon = styled.div`
-	width: 40px;
+	min-width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	background: ${color.white};

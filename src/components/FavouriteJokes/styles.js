@@ -27,11 +27,12 @@ const DisappearShadow = keyframes`
 export const ContainerFavouriteJokes = styled.div`
   background-color: ${color.grey};
   padding: 40px;
-  height: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
 
   @media ${device.tillLaptop} {
-    position: absolute;
+    overflow-y: auto;
+    position: fixed;
     right: 0;
     height: 100%;
     max-width: 480px;
@@ -45,15 +46,15 @@ export const ContainerFavouriteJokes = styled.div`
     max-width: unset;
     width: 100%;
     padding: 20px;
-    height: unset;
+    height: 100%;
   }      
 `;
 
 export const ContainerMobileShadow = styled.div`
   width: 33.3%;
-  
+
   @media ${device.tillLaptop} {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
@@ -88,7 +89,7 @@ export const HeaderBurgerButton = styled.button`
 
 export const BurgerLine = styled.span`
   display: block;
-    position: absolute;
+  position: absolute;
   height: 2px;
   width: 14px;
   background: ${color.white};
@@ -112,8 +113,7 @@ export const BurgerLine = styled.span`
 
 export const FavouriteHeader = styled.div`
   display: flex;
-  display: flex;
-  position: absolute;
+  position: fixed;
   right: 0;
   z-index: 999;
   padding: 40px;
