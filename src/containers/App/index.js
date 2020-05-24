@@ -8,6 +8,8 @@ import SearchForm from '../../components/SearchForm';
 import Joke from '../../components/Joke';
 import FavouriteJokes from '../../components/FavouriteJokes';
 
+import { updateJokesArr } from '../../actions';
+
 import { 
 	Section, 
 	GetJokeWrapper, 
@@ -51,8 +53,10 @@ const useHackerNewsApi = () => {
 
 function App(props) {
 
-	const { general } = props;
+	const { general, dispatch } = props;
 	const { searchType, currentCategory } = general;
+
+	console.log(general)
 
 	const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
 
@@ -119,7 +123,8 @@ function App(props) {
 	function handleLocalStorage(joke) {
 		jokesArray.push(joke);
   		localStorage.setItem('jokes', JSON.stringify(jokesArray));
-  		console.log(jokesArray)
+  		dispatch(updateJokesArr())
+  		//console.log(jokesArray)
 	}
 
   	// function saveFavourite(jokeData) {
@@ -170,7 +175,9 @@ function App(props) {
 	);
 }
 const mapStateToProps = state => ({
-	general: state.general
+	general: state.general,
+	dispatch: state.dispatch,
+
 });
 
 

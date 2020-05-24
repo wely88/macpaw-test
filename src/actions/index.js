@@ -8,6 +8,10 @@ export const setCurrentCategory = category => ({
   category
 })
 
+export const updateJokesArr = () => ({
+  type: 'UPDATE_JOKES_ARR',
+})
+
 // export function setLocalStorage () {
 //   let jokesArray = localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [];
 //   localStorage.setItem('jokes', JSON.stringify(jokesArray));

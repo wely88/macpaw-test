@@ -1,6 +1,6 @@
 import React from 'react';
 import { setSearchType, setCurrentCategory } from '../../actions';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import CategoryItem from './category'
 
