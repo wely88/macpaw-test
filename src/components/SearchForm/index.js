@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { setSearchType, setCurrentCategory } from '../../actions';
 import { connect } from 'react-redux'
 
@@ -18,7 +18,7 @@ function SearchForm(props) {
 
     //let [ currentCategory, setCurrentCategory ] = useState("");
 
-    const { categories, onClick, dispatch, searchType, currentCategory, onChange, isError } = props;
+    const { categories, onClick, dispatch, searchType, currentCategory, onChange } = props;
 
 	return(
 		<Form>

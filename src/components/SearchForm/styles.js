@@ -26,8 +26,8 @@ export const CategoryItem = styled.li`
 	line-height: 16px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	color: ${props => (props.isActive == 'yes' ? color.black : color.darkGrey )};
-	background: ${props => (props.isActive == 'yes' ? color.grey : color.white )};
+	color: ${props => (props.isActive === 'yes' ? color.black : color.darkGrey )};
+	background: ${props => (props.isActive === 'yes' ? color.grey : color.white )};
 	transition: .3s;
 
 	&:last-child{

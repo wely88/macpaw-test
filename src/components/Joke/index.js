@@ -24,18 +24,20 @@ import {
 
 function Joke(props) {
 
-	const { jokeData, onClick, jokesArray } = props;
+	const { jokeData, handleLocalStorage } = props;
 	const [ isFavourite, setIsFavourite ] = useState(false);
 
-	let currentDate = new Date;
+	let currentDate = new Date();
 	let jokeUpdateDate = new Date(jokeData.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
+
+	// let jokesArray = localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [];
+	// localStorage.setItem('jokes', JSON.stringify(jokesArray));
+	// const jokesData = JSON.parse(localStorage.getItem('jokes'));
 	
-	function handleClickFavourite() {
+	function handleClickFavourite(e) {
 		setIsFavourite(true)
-		jokesArray.push(jokeData);
-  		localStorage.setItem('jokes', JSON.stringify(jokesArray));
-  		console.log("new jokesArray", jokesArray)
+		handleLocalStorage()
 	}
 
 	return(

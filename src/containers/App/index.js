@@ -13,12 +13,9 @@ import {
 	GetJokeWrapper, 
 	ContainerFlex, 
 	ContainerGetJoke, 
-	ContainerFavouriteJokes, 
 	ContainerTitle,
 	ContainerSearchForm,
 	ContainerJokes,
-	ContainerMobileShadow,
-	FavouriteJokesList
 } from './styles'
 
 
@@ -28,7 +25,7 @@ const useHackerNewsApi = () => {
 	const [url, setUrl] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
-	 
+
 	useEffect(() => {
 	    const fetchData = async () => {
 	      	setIsError(false);
@@ -57,19 +54,10 @@ function App(props) {
 	const { general } = props;
 	const { searchType, currentCategory } = general;
 
-	let jokesArray = localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [];
-	localStorage.setItem('jokes', JSON.stringify(jokesArray));
-	const jokesData = JSON.parse(localStorage.getItem('jokes'));
-
-	console.log("Data from local", jokesData)
-
-	console.log(jokesData)
-
 	const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
 
 	const [ categories, setCategories ] = useState();
 	const [ queryValue, setQueryValue ] = useState('');
-	const [ randomJoke, setRandomJoke ] = useState();
 	const [ isMobile, setIsMobile ] = useState(false);
 
 //Get screen size to switch between Mobile and Web view	
@@ -124,6 +112,16 @@ function App(props) {
 
   	}  	
 
+  	let jokesArray = localStorage.getItem('jokes') ? JSON.parse(localStorage.getItem('jokes')) : [];
+	localStorage.setItem('jokes', JSON.stringify(jokesArray));
+	const jokesData = JSON.parse(localStorage.getItem('jokes'));
+	
+	function handleLocalStorage(joke) {
+		jokesArray.push(joke);
+  		localStorage.setItem('jokes', JSON.stringify(jokesArray));
+  		console.log(jokesArray)
+	}
+
   	// function saveFavourite(jokeData) {
   	// 	jokesArray.push(jokeData);
   	// 	localStorage.setItem('jokes', JSON.stringify(jokesArray));
@@ -140,19 +138,33 @@ function App(props) {
 							<TitleWithSubtitle />
 						</ContainerTitle>
 						<ContainerSearchForm>	
-							<SearchForm categories={categories} onClick={showJoke} searchType={searchType} currentCategory={currentCategory} onChange={handleInputValue}/>
+							<SearchForm 
+								categories={categories} 
+								onClick={showJoke} 
+								searchType={searchType} 
+								currentCategory={currentCategory} 
+								onChange={handleInputValue}
+							/>
 						</ContainerSearchForm>
 							{data ? 
 								<ContainerJokes>
 									{data.map(item => {
-										return <Joke key={item.id} jokeData={item} jokesArray={jokesArray}/>
+										return <Joke 
+											key={item.id} 
+											jokeData={item} 
+											jokesArray={jokesArray} 
+											handleLocalStorage={() => handleLocalStorage(item)}
+											/>
 										})
 									}
 								</ContainerJokes>
 							: null }	
 					</GetJokeWrapper>
 				</ContainerGetJoke>
-				<FavouriteJokes isMobile={isMobile} jokesData={jokesData} />
+				<FavouriteJokes 
+					isMobile={isMobile} 
+					jokesData={jokesData} 
+				/>
 			</ContainerFlex>	
 		</Section>    
 	);

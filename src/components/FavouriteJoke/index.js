@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import HeartIcon from '../images/HeartIcon';
+import React from 'react';
 import HeartFilledIcon from '../images/HeartFilledIcon';
 import MessageIcon from '../images/MessageIcon';
 import JokeLinkIcon from '../images/JokeLinkIcon';
@@ -18,7 +17,6 @@ import {
 	JokeText,
 	JokeUpdate, 
 	BoldText,
-	JokeTag,
 	ContainerJokeFooter,
 } from './styles';
 
@@ -26,7 +24,7 @@ function FavouriteJoke(props) {
 
 	const { joke } = props;
 
-	let currentDate = new Date;
+	let currentDate = new Date();
 	let jokeUpdateDate = new Date(joke.updated_at)
 	let lastUpdate = (((currentDate-jokeUpdateDate)/3600000).toFixed(0))
 
